@@ -8,38 +8,33 @@ using namespace std;
 
 
 int main(){
-freopen("input.txt","rt",stdin);
-
-Sudoku ans;
-ans.ReadIn();
-ans.Solve();
+Sudoku out;
+out.ReadIn();
+out.Solve();
 return 0;
 }
 
 
 int Sudoku::ReadIn(){
-    
-    anses[0] = 0;
+    num_of_ans[0] = 0;
     int i,j;
     for(i=0;i<12;i++){
         for(j=0;j<12;j++){
-        a[i][j] = 0;
-        aa[i][j] = 0;
+        ques[i][j] = 0;
+        ans[i][j] = 0;
         }
     }
-    cout<<"Enter a sudoku : "<<endl;
-    
+    cout<<"solve the sudoku : "<<endl;
     for(i=0;i<12;i++){
         for(j=0;j<12;j++)
-        scanf("%d",&a[i][j]);
-          
-    }
+        cin>>ques[i][j];}
+    
 }
 
 int Sudoku::row_check(int row,int r){
     int j;
     for(j=0;j<12;j++){
-        if(a[r][j] == row)
+        if(ques[r][j] == row)
         return 0;
     }
     return 1;
@@ -48,17 +43,17 @@ int Sudoku::row_check(int row,int r){
 int Sudoku::column_check(int column,int c){
     int i;
     for(i=0;i<12;i++){
-        if(a[i][c] == column)
+        if(ques[i][c] == column)
         return 0;
     }
     return 1;
 }
 
-int Sudoku::square_check(int square,int s,int ss){
+int Sudoku::cube_check(int cube,int s,int ss){
     int x=s-(s%3),y=ss-(ss%3);
     for(int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++)
-            if(a[x+i][y+j] == square)
+            if(ques[x+i][y+j] == cube)
             return 0;
     }
     return 1;
@@ -69,19 +64,19 @@ void Sudoku::SolveSudoku(){
     int number = 0;
     for(i=0;i<12;i++){
         for(j=0;j<12;j++){
-            if (a[i][j] != 0)
+            if (ques[i][j] != 0)
                 number++;
         }
     }
     if(number == 144){
-        anses[0]++;
-        if(anses[0] == 2){
+        num_of_ans[0]++;
+        if(num_of_ans[0] == 2){
         printf("2\n");
             return;
         }
         for(i=0;i<12;i++){
             for(j=0;j<12;j++)
-            aa[i][j]=a[i][j];
+            ans[i][j]=ques[i][j];
         }
             return;
     }
@@ -91,12 +86,12 @@ void Sudoku::SolveSudoku(){
     for(i=11;i>=0;i--){
         for(j=11;j>=0;j--){
 
-            if(a[i][j] == 0){
+            if(ques[i][j] == 0){
                 for(input=1;input<=9;input++){
-                      if(row_check(input,i) == 1 && column_check(input,j) == 1 && square_check(input,i,j) == 1){
-                            a[i][j]=input;
+                      if(row_check(input,i) == 1 && column_check(input,j) == 1 && cube_check(input,i,j) == 1){
+                            ques[i][j]=input;
                             SolveSudoku();
-                            a[i][j] = 0;
+                            ques[i][j] = 0;
                       }
                 }
                 return;
@@ -109,16 +104,16 @@ void Sudoku::print_answer(){
     int i,j;
     for(i=0;i<12;i++){
         for(j=0;j<12;j++)
-        cout<<aa[i][j]<<" ";
+        cout<<ans[i][j]<<" ";
         printf("\n");
     }
 }
 
 void Sudoku::Solve(){
 SolveSudoku();
-if(anses[0] == 0)
+if(num_of_ans[0] == 0)
     cout<<"0"<<endl;
-else if(anses[0] == 1){
+else if(num_of_ans[0] == 1){
     cout<<"1"<<endl;
     print_answer();
 }

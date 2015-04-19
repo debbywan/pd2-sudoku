@@ -8,8 +8,8 @@ using namespace std;
 
 
 int main(){
-Sudoku ans;
-ans.GiveQuestion();
+Sudoku out;
+out.GiveQuestion();
 return 0;
 }
 
@@ -78,7 +78,7 @@ printf("0 7 3 6 0 -1 -1 -1 -1 9 0 4\n\
 7 0 0 0 0 6 0 4 0 -1 -1 -1\n\
 0 1 0 0 3 0 7 0 5 -1 -1 -1\n\
 0 0 9 4 0 0 1 0 6 -1 -1 -1\n");
-break;
+break; //旋轉原矩陣
  }
 }
 
