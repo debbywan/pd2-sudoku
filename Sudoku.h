@@ -10,14 +10,13 @@ public:
     int ReadIn();
     int row_check(int ,int );
     int column_check(int ,int );
-    int cube_check(int ,int ,int );
+    int square_check(int ,int ,int );
     void SolveSudoku();
     void print_answer();
     void Solve();
     void GiveQuestion();
 private:
-    int num_of_ans[1];
-    int ques[12][12];
-    int ans[12][12];
+    int anses[1];
+    int a[12][12];
+    int aa[12][12];
 };
-
